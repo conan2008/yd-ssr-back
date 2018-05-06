@@ -1,17 +1,18 @@
 <template>
   <div id="app">
+    <headerComponent></headerComponent>
     <router-view/>
+    <footerComponent></footerComponent>
   </div>
 </template>
 
 <script>
-// import Header from "../../widget/header/header";
-// // import Footer from "../../widget/footer/footer";
-// // Footer.init();
-// Header.init();
+import headerComponent from "./components/header/Header.vue";
+import footerComponent from "./components/footer/Footer.vue";
 
 export default {
-  name: 'App'
+  name: "App",
+  components: {headerComponent, footerComponent}
 }
 </script>
 

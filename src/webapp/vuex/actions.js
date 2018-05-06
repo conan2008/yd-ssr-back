@@ -1,21 +1,26 @@
 import request  from "axios";
 request.defaults.baseURL= "http://dev.yidengxuetang.com:8081/";
-// export const getTopics = ({commit,state})=>{
-// 	return request.get('users/1').then((response)=>{
-// 		console.log("response", response);
+
+// export const getUserInfo = ({commit,state})=>{
+// 	return request.get('users/getUserInfo').then((response)=>{
 // 		if (response.statusText == 'OK') {
-// 			commit("TOPICS_LIST",response.data.data);
+// 			commit("USER_INFO",response.data);
 // 		}
 // 	})
 // }
-export const increment = ({commit})=>commit('INCREMENT');
-export const decrement = ({commit})=>commit('DECREMENT');
 
-export const getUserInfo = ({commit,state})=>{
-	return request.get('users/getUserInfo').then((response)=>{
-		console.log("response", response.data);
+export const getMainData = ({commit,state})=>{
+	return request.get('notice').then((response)=>{
 		if (response.statusText == 'OK') {
-			commit("USER_INFO",response.data);
+			commit("NOTICE",response.data);
+		}
+	})
+}
+
+export const getCourseData = ({commit,state})=>{
+	return request.get('course').then((response)=>{
+		if (response.statusText == 'OK') {
+			commit("COURSE",response.data);
 		}
 	})
 }

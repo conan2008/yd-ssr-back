@@ -8,7 +8,7 @@
                     </a>
                 </div>
                 <div class="box bg-1">
-                    <a href="/index.html" class="button button--wapasha button-color button--round-s">首页</a>
+                    <router-link to="/" class="button button--wapasha button-color button--round-s">首页</router-link>
 <!--                     <a href="javascript:alert('正在开发中')" class="button button--wapashas button--round-s ">成长之路</a> -->
                     <a href="/bookDesk" class="button button--book button--round-s">图书馆</a>
                    <a href="/student" class="button button--student button--round-s">简历填写</a>
@@ -17,8 +17,8 @@
                     <a href="javascript:alert('成就系统即将开放，敬请期待~')" target="_blank">
                         <img alt="我的小树" width="38px" title="我的成就" src="" class="greentree" id="js-greentree">
                     </a>
-                    <img :src="userInfo.avatar" class="face">
-                    <span class="title">{{userInfo.nick}}</span>
+                    <img v-if="mainData.userInfo" :src="mainData.userInfo.avatar" class="face">
+                    <span class="title">{{mainData.userInfo ? mainData.userInfo.nick : ""}}</span>
                     <a href="http://www.yidengxuetang.com/users/login">退出登录</a>
                 </div>
             </div>
@@ -29,16 +29,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-// const fetchInitialData = ({ store }) => {
-//   return store.dispatch("getUserInfo");
-// };
 
 export default {
-  // name: "UserInfo",
-  // asyncData: fetchInitialData,
   computed: {
     ...mapGetters({
-      userInfo: "getUserInfo"
+      mainData: "getMainData"
     })
   },
   methods: {
@@ -51,7 +46,7 @@ export default {
   },
   mounted() {
     this.init();
-    // fetchInitialData({ store: this.$store });
+    // this.$router.push({path:'/indexmain'});
   }
 };
 </script>

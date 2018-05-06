@@ -55,8 +55,8 @@ const server = {
     "RDS_PORT": 6379, //端口号
     "RDS_HOST": '6f814adbdbbc436c.m.cnbja.kvstore.aliyuncs.com', //服务器IP
     "RDS_PWD": 'YD2016Radis', //密码
-    "userLoginURL": 'http://test.yidengxuetang.com:8085/users/login',
-    "ydWebUrl": "http://test.yidengxuetang.com",
+    "userLoginURL": 'http://dev.yidengxuetang.com:8085/users/login',
+    "ydWebUrl": "http://dev.yidengxuetang.com",
     "apiUrl": "http://101.200.216.170:8080/",
 };
 //当NODE_ENV环境变量值为local时

@@ -1,26 +1,31 @@
 <template>
-    <div>
-        <headerComponent></headerComponent>
-        <footerComponent></footerComponent>
-    </div>
+  <div>
+      <toolbar></toolbar>
+      <course></course>
+  </div>
 </template>
 
 <script>
-import headerComponent from "../../components/header/Header.vue";
-import footerComponent from "../../components/footer/Footer.vue";
+import toolbar from '../../components/toolbar/Toolbar';
+import course from '../../components/course/Course';
 
-const fetchInitialData = ({ store }) => {
-  return store.dispatch("getUserInfo");
+const fetchMainData = ({ store }) => {
+  return store.dispatch("getMainData");
+};
+
+const fetchCourseData = ({ store }) => {
+  return store.dispatch("getCourseData");
 };
 
 export default {
-  components: {headerComponent, footerComponent},
-  name: "UserInfo",
-  asyncData: fetchInitialData,
+  name: "Index",
+  components: {toolbar},
+  // asyncData: [fetchMainData, fetchCourseData],
+  asyncData: fetchMainData,
   mounted() {
-    fetchInitialData({ store: this.$store });
+    fetchMainData({ store: this.$store });
+    // fetchCourseData({ store: this.$store });
   }
 };
 
 </script>
-

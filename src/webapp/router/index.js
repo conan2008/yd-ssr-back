@@ -14,7 +14,7 @@ export function createRouter() {
             path: '/',
             component: IndexVue
         }, {
-            path: '/test',
+            path: '/indexmain',
             component: Test
         },{
             path: '/about',
