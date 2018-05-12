@@ -17,28 +17,44 @@ export default context => {
         router.push(context.url);
         router.onReady(() => {
             const matchCompents = router.getMatchedComponents();
-            console.log("matchCompents", matchCompents);
-            Promise.all(matchCompents.map((Component) => {
-                    if (Component.asyncData) {
+            const asyncDataList = [];
 
-                        return Component.asyncData({
-                            store
+            function asyncDataHelper(component) {
+                if (component.asyncData) {
+                    if (Object.prototype.toString.call(component.asyncData) == '[object Array]') {
+                        component.asyncData.map(asyncData => {
+                            asyncDataList.push(asyncData({
+                                store
+                            }));
                         })
-                        // Component.asyncData.map((asyncData) => {
-                        //     console.log("asyncData", asyncData);
-                        //     return asyncData({
-                        //         store
-                        //     })
-                        // })
-
+                    } else {
+                        asyncDataList.push(component.asyncData({
+                            store
+                        }));
                     }
-                }))
-                .then(() => {
-                    console.log("store.state", store.state);
-                    //读取完
-                    context.state = store.state;
-                    resolve(app);
-                }).catch(reject)
+                }
+            }
+
+            //收集组件中的asyncData
+            matchCompents.map((Component) => {
+                console.log("Component", Component);
+
+                if (Component.asyncData) {
+                    asyncDataHelper(Component);
+                }
+
+                for (const key in Component.components) {
+                    if (!Component.components.hasOwnProperty(key)) continue;
+                    asyncDataHelper(Component.components[key]);
+                }
+
+            })
+
+            Promise.all(asyncDataList).then(() => {
+                //读取完
+                context.state = store.state;
+                resolve(app);
+            }).catch(reject)
         }, reject);
     });
 }
