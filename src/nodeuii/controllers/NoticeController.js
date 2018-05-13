@@ -16,11 +16,6 @@ export default class UserController {
      async getUserInfo(ctx, next) {
         let result = {};
         const data = await this.noticeService.getData();
-        result = {
-            notice: data.result.notice,
-            userInfo: ctx.session.userInfo.user_info
-        }
-        console.log(result);
-        ctx.body = result;
+        ctx.body = data.result.notice;
     }
 }

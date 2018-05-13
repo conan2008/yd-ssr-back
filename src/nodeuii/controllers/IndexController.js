@@ -1,5 +1,6 @@
  import { route, GET, POST, before } from 'awilix-koa';
  import { createBundleRenderer } from 'vue-server-renderer';
+ import ydAuthenticate from "../middlewares/ydAuthenticate";
  import cheerio from 'cheerio';
  const fs = require("fs");
  const path = require("path");
@@ -29,6 +30,7 @@
          });
      }
      @GET()
+     @before([ydAuthenticate()])
      async getIndex(ctx) {
          const rootPath = path.join(__dirname, '..');
          const serverBundle = require('../assets/vue-ssr-server-bundle.json');

@@ -2,7 +2,7 @@
   <div class="widget-tools">
     <div class="tips w128">
         <span class="tip-icon pull-left"></span>
-        <span class="tip-text pull-left" id="tips" v-html="mainData.notice">
+        <span class="tip-text pull-left" id="tips" v-html="notice">
             	<!-- {% autoescape false %}[[notice]]{% endautoescape %} -->
         </span>
     </div>
@@ -11,11 +11,19 @@
 <script>
 import { mapGetters } from "vuex";
 
+const fetchNoticeData = ({ store }) => {
+  return store.dispatch("getNoticeInfo");
+};
+
 export default {
   computed: {
     ...mapGetters({
-      mainData: "getMainData"
+      notice: "getNoticeInfo"
     })
+  },
+  asyncData: fetchNoticeData,
+  mounted() {
+    fetchNoticeData({ store: this.$store });
   }
 };
 </script>

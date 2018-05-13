@@ -15,7 +15,9 @@ default class loginValidate extends Store{
     async get() {
         // const result = await this.ctx.redis.get('shiro_redis_session:fe5ef587-f883-4f77-8a3d-6e26369f83aa');
         // console.log('获取redis', result);
+        // console.log("this.ctx", this.ctx);
         const _hc = this.ctx.header.cookie || "";
+        // console.log("this.ctx.header.cookie", this.ctx.header.cookie);
         const cookies = cookie.parse(_hc);
         const _yid = cookies['_yideng_sid'];
         let result = {
@@ -28,7 +30,7 @@ default class loginValidate extends Store{
                 description: ""
             }
         };
-
+console.log("_yid", _yid);
         if (_yid) {
             const res = await this.ctx.redis.get('shiro_redis_session:' + _yid + '');
             const _res = JSON.parse(res);

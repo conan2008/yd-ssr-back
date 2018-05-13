@@ -4,6 +4,8 @@ import {
     POST,
     before
 } from 'awilix-koa';
+import config from '../config/config';
+import ydAuthenticate from "../middlewares/ydAuthenticate";
 @route("/course")
 export default class CrouseController {
     constructor({
@@ -14,8 +16,9 @@ export default class CrouseController {
 
 
     @GET()
+    @before([ydAuthenticate()])
     async getCrouse(ctx, next) {
-        const examResult = await this.courseService.getScoreList();
+        const examResult = await this.courseService.getScoreList(ctx);
 
         let levelNumber = 10;
         //英文数字
@@ -129,7 +132,6 @@ export default class CrouseController {
             result: examinfo,
             course: course
         };
-        console.log("_data",_data);
         ctx.body = _data;
     }
 }

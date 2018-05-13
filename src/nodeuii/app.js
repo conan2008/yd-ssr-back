@@ -9,7 +9,7 @@ const { loadControllers, scopePerRequest } = require('awilix-koa');
 const app = new Koa();
 
 /** new ssr start */
-import Store from './libs/loginValidate';
+
 import session from 'koa-session2';
 import convert from 'koa-convert'; //koa1 转换器
 import redisPool from "koa-redis-pool";
@@ -34,15 +34,15 @@ app.use(session({
     key: "_yideng_learnid", //default "koa:sess"
 }));
 
-app.use(async(ctx, next) => {
-    //注入session
-    const redisResult = (new Store(ctx)).get();
+// app.use(async(ctx, next) => {
+//     //注入session
+//     const redisResult = (new Store(ctx)).get();
 
-    await redisResult.then((res) => {
-        ctx.session.userInfo = res;
-    });
-    await next();
-});
+//     await redisResult.then((res) => {
+//         ctx.session.userInfo = res;
+//     });
+//     await next();
+// });
 /** new ssr end */
 
 //创建IOC的容器

@@ -8,11 +8,12 @@ export default class CrouseService {
         this.ctx = ctx;
     }
 
-    getScoreList() {
+    getScoreList(ctxx) {
         const data = {
-            uid: this.ctx.session.userInfo.uid
+            // uid: this.ctx.session.userInfo.uid
+            uid: ctxx.session.userInfo.uid
         };
-        const safeRequestIns = new safeRequest(this.ctx, config.getStudentScoreList, data);
+        const safeRequestIns = new safeRequest(ctxx, config.getStudentScoreList, data);
         return safeRequestIns.request();
     }
 }

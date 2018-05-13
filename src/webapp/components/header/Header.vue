@@ -17,8 +17,8 @@
                     <a href="javascript:alert('成就系统即将开放，敬请期待~')" target="_blank">
                         <img alt="我的小树" width="38px" title="我的成就" src="" class="greentree" id="js-greentree">
                     </a>
-                    <img v-if="mainData.userInfo" :src="mainData.userInfo.avatar" class="face">
-                    <span class="title">{{mainData.userInfo ? mainData.userInfo.nick : ""}}</span>
+                    <img :src="userInfo.avatar" class="face">
+                    <span class="title">{{userInfo.nick}}</span>
                     <a href="http://www.yidengxuetang.com/users/login">退出登录</a>
                 </div>
             </div>
@@ -30,12 +30,17 @@
 <script>
 import { mapGetters } from "vuex";
 
+const fetchUserData = ({ store }) => {
+  return store.dispatch("getUserInfo");
+};
+
 export default {
   computed: {
     ...mapGetters({
-      mainData: "getMainData"
+      userInfo: "getUserInfo"
     })
   },
+  asyncData: fetchUserData,
   methods: {
     init() {
       const _logo = require("./images/logo.png");
@@ -46,14 +51,14 @@ export default {
   },
   mounted() {
     this.init();
-    // this.$router.push({path:'/indexmain'});
+    fetchUserData({ store: this.$store });
   }
 };
 </script>
 
 <style scoped>
 /* 自定义配置全局类 */
-@import "./styles/headerbase.css";
+/* @import "./styles/headerbase.css"; */
 
 :root {
   --height: 70px;

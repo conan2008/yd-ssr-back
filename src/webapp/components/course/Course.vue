@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div class="widget-course w128">
+    <div class="widget-course w128">
         <div class="title">
             <p class="course_outline">课程大纲</p>
             <div class="spliter"></div>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>  
     <div class="widget-exam w128">
         <div class="title">
             <p class="course_outline">成果测评</p>
@@ -45,7 +45,7 @@
             <a :href="list.idurl" style="display: inline-block;width: 100%;height: 100%;color:white" target="_blank" >{{ list.index}}</a>
         </div>
     </div>
-</div> -->
+</div>
 </div>
 
 </template>
@@ -53,9 +53,9 @@
 <script>
 import { mapGetters } from "vuex";
 
-// const fetchCourseData = ({ store }) => {
-//   return store.dispatch("getCourseData");
-// };
+const fetchCourseData = ({ store }) => {
+  return store.dispatch("getCourseData");
+};
 
 export default {
   data() {
@@ -66,7 +66,7 @@ export default {
       msg: "课程大纲"
     };
   },
-//   asyncData: fetchCourseData,
+  asyncData: fetchCourseData,
   computed: {
     ...mapGetters({
       courseInfo: "getCourseData"
@@ -84,8 +84,8 @@ export default {
     }
   },
   mounted() {
-    // fetchCourseData({ store: this.$store });
-    // this.init();
+    fetchCourseData({ store: this.$store });
+    this.init();
   }
 };
 </script>

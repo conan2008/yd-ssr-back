@@ -1,4 +1,5 @@
 import { route, GET, POST, before } from 'awilix-koa';
+import ydAuthenticate from "../middlewares/ydAuthenticate";
 @route("/users")
 export default class UserController {
     constructor({ userService }) {
@@ -14,6 +15,7 @@ export default class UserController {
 
     @route('/getUserInfo')
      @GET()
+     @before([ydAuthenticate()])
      async getUserInfo(ctx, next) {
         ctx.body = ctx.session.userInfo.user_info;
     }

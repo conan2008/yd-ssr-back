@@ -4,8 +4,7 @@ import * as actions from "./actions";
 import * as getters from "./getters";
 //定义初始化的state
 const defaultSatate = {
-    count: 0,
-    topics: []
+    
 }
 
 //判断当前的开发环境

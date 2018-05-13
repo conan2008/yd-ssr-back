@@ -1,31 +1,25 @@
 <template>
   <div>
+      <headerComponent></headerComponent>
       <toolbar></toolbar>
       <course></course>
+      <footerComponent></footerComponent>
   </div>
 </template>
 
 <script>
+import headerComponent from "../../components/header/Header.vue";
+import footerComponent from "../../components/footer/Footer.vue";
 import toolbar from '../../components/toolbar/Toolbar';
 import course from '../../components/course/Course';
 
-const fetchMainData = ({ store }) => {
-  return store.dispatch("getMainData");
-};
-
-const fetchCourseData = ({ store }) => {
-  return store.dispatch("getCourseData");
-};
 
 export default {
   name: "Index",
-  components: {toolbar},
-  // asyncData: [fetchMainData, fetchCourseData],
-  asyncData: fetchMainData,
-  mounted() {
-    fetchMainData({ store: this.$store });
-    // fetchCourseData({ store: this.$store });
-  }
+  components: {headerComponent, footerComponent, toolbar, course},
 };
 
 </script>
+<style>
+@import './styles/headerbase.css';
+</style>
